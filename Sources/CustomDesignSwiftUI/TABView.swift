@@ -10,8 +10,13 @@ import SwiftUI
 @available(iOS 14, macOS 11.0, *)
 public struct TABView<Content: View>: View {
     
-    let viewBuilder: () -> Content
+     let viewBuilder: () -> Content
     @ObservedObject var tabItems = TabItemsData()
+    
+    public init(viewBuilder: @escaping () -> Content, tabItems: TabItemsData) {
+        self.viewBuilder = viewBuilder
+        self.tabItems = tabItems
+    }
     
     public var body: some View {
         
@@ -27,26 +32,26 @@ public struct TABView<Content: View>: View {
             }
             //"house.fill"
             
-//            Text("Bookmark Tab")
-//                .font(.system(size: 30, weight: .bold, design: .rounded))
-//                .tabItem {
-//                    Image(systemName: "bookmark.circle.fill")
-//                    Text("Bookmark")
-//                }
-//
-//            Text("Video Tab")
-//                .font(.system(size: 30, weight: .bold, design: .rounded))
-//                .tabItem {
-//                    Image(systemName: "video.circle.fill")
-//                    Text("Video")
-//                }
-//
-//            Text("Profile Tab")
-//                .font(.system(size: 30, weight: .bold, design: .rounded))
-//                .tabItem {
-//                    Image(systemName: "person.crop.circle")
-//                    Text("Profile")
-//                }
+            Text("Bookmark Tab")
+                .font(.system(size: 30, weight: .bold, design: .rounded))
+                .tabItem {
+                    Image(systemName: "bookmark.circle.fill")
+                    Text("Bookmark")
+                }
+
+            Text("Video Tab")
+                .font(.system(size: 30, weight: .bold, design: .rounded))
+                .tabItem {
+                    Image(systemName: "video.circle.fill")
+                    Text("Video")
+                }
+
+            Text("Profile Tab")
+                .font(.system(size: 30, weight: .bold, design: .rounded))
+                .tabItem {
+                    Image(systemName: "person.crop.circle")
+                    Text("Profile")
+                }
         }
         .accentColor(.red)
         Spacer()
@@ -54,25 +59,25 @@ public struct TABView<Content: View>: View {
 }
 
 
-@available(iOS 14, macOS 11.0, *)
-struct TABView_Previews: PreviewProvider {
-    static var previews: some View {
-        TABView{
-            Text("DYNAMIC VIEW PREVIEW")
-            
-        }
-    }
-}
+//@available(iOS 14, macOS 11.0, *)
+//struct TABView_Previews: PreviewProvider {
+//    static var previews: some View {
+//        TABView{
+//            Text("DYNAMIC VIEW PREVIEW")
+//
+//        }
+//    }
+//}
 
 
 
 @available(iOS 14, macOS 11.0, *)
 
-class TabItemsData :ObservableObject{
+public class TabItemsData :ObservableObject{
     @Published var tabItems = [TabItem]()
 }
 
-class TabItem : Identifiable{
+public class TabItem : Identifiable{
     let id = UUID()
     var name = ""
     var icon = ""
