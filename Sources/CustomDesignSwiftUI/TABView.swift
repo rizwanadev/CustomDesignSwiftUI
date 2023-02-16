@@ -8,12 +8,12 @@
 import SwiftUI
 
 @available(iOS 14, macOS 11.0, *)
-struct TABView<Content: View>: View {
+public struct TABView<Content: View>: View {
     
     let viewBuilder: () -> Content
     @ObservedObject var tabItems = TabItemsData()
     
-    var body: some View {
+    public var body: some View {
         
         TabView {
             
@@ -33,14 +33,14 @@ struct TABView<Content: View>: View {
 //                    Image(systemName: "bookmark.circle.fill")
 //                    Text("Bookmark")
 //                }
-//            
+//
 //            Text("Video Tab")
 //                .font(.system(size: 30, weight: .bold, design: .rounded))
 //                .tabItem {
 //                    Image(systemName: "video.circle.fill")
 //                    Text("Video")
 //                }
-//            
+//
 //            Text("Profile Tab")
 //                .font(.system(size: 30, weight: .bold, design: .rounded))
 //                .tabItem {
