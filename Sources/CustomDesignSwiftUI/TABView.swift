@@ -85,4 +85,9 @@ public class TabItem : Identifiable{
     public let id = UUID()
     var name = ""
     var icon = ""
+    
+    public init(name: String = "", icon: String = "") {
+        self.name = name
+        self.icon = icon
+    }
 }
