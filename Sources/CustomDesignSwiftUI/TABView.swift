@@ -75,10 +75,14 @@ public struct TABView<Content: View>: View {
 
 public class TabItemsData :ObservableObject{
     @Published var tabItems = [TabItem]()
+    
+    init(tabItems: [TabItem] = [TabItem]()) {
+        self.tabItems = tabItems
+    }
 }
 
-public class TabItem : Identifiable{
-    let id = UUID()
+class TabItem : Identifiable{
+     let id = UUID()
     var name = ""
     var icon = ""
 }
