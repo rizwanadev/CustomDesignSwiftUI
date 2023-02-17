@@ -10,10 +10,10 @@ import SwiftUI
 @available(iOS 14, macOS 11.0, *)
 public struct TABView<Content: View>: View {
     
-     let viewBuilder: () -> Content
+     let viewBuilder: () -> [Content]
     @ObservedObject var tabItems = TabItemsData()
     
-    public init(viewBuilder: @escaping () -> Content, tabItems: TabItemsData) {
+    public init(viewBuilder: @escaping () -> [Content], tabItems: TabItemsData) {
         self.viewBuilder = viewBuilder
         self.tabItems = tabItems
     }
@@ -22,36 +22,14 @@ public struct TABView<Content: View>: View {
         
         TabView {
             
-            ForEach(tabItems.tabItems) { tabItem in
-                viewBuilder()
+            ForEach(Array(tabItems.tabItems.enumerated()),id: \.0) { index , tabItem in
+                viewBuilder()[index]
                     .font(.system(size: 30, weight: .bold, design: .rounded))
                     .tabItem {
                         Image(systemName: tabItem.icon)
                         Text(tabItem.name)
                     }
             }
-            //"house.fill"
-            
-            Text("Bookmark Tab")
-                .font(.system(size: 30, weight: .bold, design: .rounded))
-                .tabItem {
-                    Image(systemName: "bookmark.circle.fill")
-                    Text("Bookmark")
-                }
-
-            Text("Video Tab")
-                .font(.system(size: 30, weight: .bold, design: .rounded))
-                .tabItem {
-                    Image(systemName: "video.circle.fill")
-                    Text("Video")
-                }
-
-            Text("Profile Tab")
-                .font(.system(size: 30, weight: .bold, design: .rounded))
-                .tabItem {
-                    Image(systemName: "person.crop.circle")
-                    Text("Profile")
-                }
         }
         .accentColor(.red)
         Spacer()
